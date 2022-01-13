@@ -115,10 +115,10 @@ class Datos extends Conexion
 		//$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY marca");
 
 		$stmt = Conexion::conectar()->
-		prepare("SELECT E.id , marca, modelo, descripcion, observacion, E.estado id_estado, U.estado estado, E.categoria id_categ, C.categoria
+		prepare("SELECT E.id , marca, modelo, E.descripcion, observacion, id_estado, U.estado estado, id_categoria, c.categoria
 		FROM $tabla E 
-		INNER JOIN estado U ON E.estado = U.id
-		INNER JOIN categoria C ON E.categoria = C.id
+		INNER JOIN estado U ON E.id_estado = U.id
+		INNER JOIN categoria C ON E.id_categoria = C.id
 		ORDER BY marca");
 
 		$stmt->execute();
@@ -131,7 +131,7 @@ class Datos extends Conexion
 		$stmt->bindColumn("observacion", $observacion);
 		$stmt->bindColumn("id_estado", $id_estado);
 		$stmt->bindColumn("estado", $estado);
-		$stmt->bindColumn("id_categ", $id_categ);
+		$stmt->bindColumn("id_categoria", $id_categ);
 		$stmt->bindColumn("categoria", $categoria);
 
 		$equipos = array();
@@ -185,7 +185,7 @@ class Datos extends Conexion
 
 	public function crearEquipoModel($datosModel, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (marca, modelo, descripcion, observacion, estado, categoria ) 
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (marca, modelo, descripcion, observacion, id_estado, id_categoria ) 
 														VALUES (:marca, :modelo, :descripcion, :observacion, :estado, :categoria)");
 
 		$stmt->bindParam(":marca", $datosModel["marca"], PDO::PARAM_STR);
@@ -204,7 +204,7 @@ class Datos extends Conexion
 
 	public function updateEquipoModel($datosModel, $tabla){
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla set marca = :marca, modelo = :modelo,
-		 descripcion = :descripcion, observacion = :observacion, estado = :estado, categoria = :categoria
+		 descripcion = :descripcion, observacion = :observacion, id_estado = :estado, id_categoria = :categoria
 		WHERE id = :id");
 	
 		$stmt->bindParam(":id", $datosModel["id"], PDO::PARAM_STR);
@@ -297,8 +297,8 @@ class Datos extends Conexion
 	public function LeerComponentesModel($tabla){
 
 		$stmt = Conexion::conectar()->
-		prepare("SELECT C.id, equipo, titulo, C.estado id_estado, E.estado estado, descripcion, disponibilidad, hora FROM $tabla C 
-		INNER JOIN estado E ON C.estado = E.id");
+		prepare("SELECT C.id, equipo, titulo, id_estado, E.estado estado, descripcion, disponibilidad, hora FROM $tabla C 
+		INNER JOIN estado E ON C.id_estado = E.id");
 		
 		$stmt->execute();
 

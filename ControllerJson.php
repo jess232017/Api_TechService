@@ -19,12 +19,14 @@ class ControllerJson
 			"image"=>$image,
 			"role"=>$role);
 
-		$respuesta = Datos::crearUsuarioModel($datosController, "usuario");
+		$data = new Datos();
+		$respuesta = $data->crearUsuarioModel($datosController, "usuario");
 		return $respuesta;
 	}
 
 	public function leerUsuariosController(){
-		$respuesta = Datos::leerUsuariosModel("usuario");
+		$data = new Datos();
+		$respuesta = $data->leerUsuariosModel("usuario");
 		return $respuesta;
 	}
 
@@ -32,8 +34,9 @@ class ControllerJson
 
 		$datosController = array("mail" => $mail,
 			"password"=>$password);
-
-		$respuesta = Datos::loguearUsuarioModel($datosController, "usuario");
+			
+		$data = new Datos();
+		$respuesta = $data->loguearUsuarioModel($datosController, "usuario");
 		
 		return $respuesta;
 	}
@@ -47,19 +50,23 @@ class ControllerJson
 			"image"=>$image,
 			"role"=>$role);
 			
-		$respuesta = Datos::updateUsuarioModel($datosController, "usuario");
+			
+		$data = new Datos();
+		$respuesta = $data->updateUsuarioModel($datosController, "usuario");
 		return $respuesta;
 	}
 
 	#equipos
 	public function LeerEquiposController(){
-		$respuesta = Datos::LeerEquiposModel("equipo");
+		$data = new Datos();
+		$respuesta = $data->LeerEquiposModel("equipo");
 		return $respuesta;
 	}
 	
 	//Equipo Especifico
 	public function LeerEquipoController($id){
-		$respuesta = Datos::LeerEquipoModel($id ,"equipo");
+		$data = new Datos();
+		$respuesta = $data->LeerEquipoModel($id ,"equipo");
 		return $respuesta;
 	}
 
@@ -73,7 +80,8 @@ class ControllerJson
 			"estado"=>$estado,
 			"categoria"=>$categoria);
 
-		$respuesta = Datos::crearEquipoModel($datosController, "equipo");
+		$data = new Datos();
+		$respuesta = $data->crearEquipoModel($datosController, "equipo");
 		return $respuesta;
 	}
 
@@ -88,25 +96,29 @@ class ControllerJson
 			"estado"=>$estado,
 			"categoria"=>$categoria);
 
-		$respuesta = Datos::updateEquipoModel($datosController, "equipo");
+		$data = new Datos();
+		$respuesta = $data->updateEquipoModel($datosController, "equipo");
 		return $respuesta;
 	}
 
 	#Estados
 	public function leerEstadosController(){
-		$respuesta = Datos::leerEstadosModel("estado");
+		$data = new Datos();
+		$respuesta = $data->leerEstadosModel("estado");
 		return $respuesta;
 	}
 	
 
 	#categoria
 	public function leerCategoriaController(){
-		$respuesta = Datos::leerCategoriaModel("categoria");
+		$data = new Datos();
+		$respuesta = $data->leerCategoriaModel("categoria");
 		return $respuesta;
 	}
 
 	public function createCategoriaController($titulo){
-		$respuesta = Datos::createCategoriaModel($titulo, "categoria");
+		$data = new Datos();
+		$respuesta = $data->createCategoriaModel($titulo, "categoria");
 		return $respuesta;
 	}
 
@@ -115,18 +127,21 @@ class ControllerJson
 		$datosController = array("id"=>$id,
 			"titulo"=>$titulo);
 
-		$respuesta = Datos::updateCategoriaModel($datosController, "categoria");
+		$data = new Datos();
+		$respuesta = $data->updateCategoriaModel($datosController, "categoria");
 		return $respuesta;
 	}
 
 	public function deleteCategoriaController($id){
-		$respuesta = Datos::deleteCategoriaModel($id, "categoria");
+		$data = new Datos();
+		$respuesta = $data->deleteCategoriaModel($id, "categoria");
 		return $respuesta;
 	}
 
 	#Componente
 	public function leerComponentesController(){
-		$respuesta = Datos::LeerComponentesModel("componente");
+		$data = new Datos();
+		$respuesta = $data->LeerComponentesModel("componente");
 		return $respuesta;
 	}
 }
